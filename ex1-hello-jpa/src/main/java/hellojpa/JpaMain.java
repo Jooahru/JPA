@@ -14,17 +14,19 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            //등록
-//            Member member = new Member();
-//            member.setId(2L);
-//            member.setName("HelloB");
-            //수정
-//            Member findMember = em.find(Member.class, 1L);
-//            System.out.println("findMember = " + findMember.getId());
-//            System.out.println("findMember = " + findMember.getName());
-//            findMember.setName("HelloJPA");
-            //삭제
-            //em.remove(findMember);
+            //비영속
+            Member member = new Member();
+            member.setId(101L);
+            member.setName("HelloJPA");
+
+            //영속
+            System.out.println("===BEFORE=====");
+            em.persist(member);
+            System.out.println("===AFTER=====");
+
+            Member findMember = em.find(Member.class, 101L);
+            System.out.println("findMember.getId() = " + findMember.getId());
+            System.out.println("findMember.getName() = " + findMember.getName());
 
             tx.commit();
         } catch (Exception e) {

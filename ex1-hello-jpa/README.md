@@ -37,7 +37,21 @@
        * DB의 테이블 이름과 매칭 시켜줄 수 있다
    * 필드와 컬럼 매핑  
      * @Column
-       * DDL 생성기능 (unique, length 설정가능)
+       * name 필드와 매핑할 테이블의 컬럼 이름 (default : 객체의 필드이름)
+       * insertable,updatable 등록 변경 가능 여부 (default : true)
+       * nullable null값 허용 여부 (default)
+       * length 컬럼 길이 설정
+       * columDefinition 컬럼정보를 직접 설정
+     * @Transient
+       * 특정 필드를 컬럼에 매핑 시키고 싶지 않을 때
+     * @Enumerated
+       * EnumType.STRING : enum이름을 데이터베이스에 저장
+     * @Temporal
+       * Date 사용시 필요 
+       * 자바8이상에서는 localDate,LocalDateTime 사용하면 필요없음
+     * @Lob
+       * 지정할 수 있는 속성 없음
+       * String 이면 CLOB 나머지 BLOB
    * 기본 키 매핑: @Id
    * 연관관계 매핑: @ManyToOne, @JoinColumn
  * 데이타베이스 스키마 자동 생성

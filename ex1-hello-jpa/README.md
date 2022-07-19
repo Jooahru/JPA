@@ -25,3 +25,26 @@
    * 엔티티 등록 트랜잭션을 지원하는 쓰기 지연
    * 엔티티 수정 변경 감지
    * 지연로딩
+ * 엔티티 매핑
+   * 객체와 테이블 매핑 
+     * @Entity
+       * @Entity가 붙은 클래스는 JPA가 관리
+       * JPA를 사용해서 테이블과 매핑할 클래스는 @Entity 필수
+       * 기본 생성자 필수
+       * final 클래스, enum,interface,inner클래스 사용 X
+       * 저장할 필드에 final 사용 X
+     * @Table
+       * DB의 테이블 이름과 매칭 시켜줄 수 있다
+   * 필드와 컬럼 매핑  
+     * @Column
+       * DDL 생성기능 (unique, length 설정가능)
+   * 기본 키 매핑: @Id
+   * 연관관계 매핑: @ManyToOne, @JoinColumn
+ * 데이타베이스 스키마 자동 생성
+   * hibernate.hbm2ddl.auto 옵션
+     * create 기존 테이블 삭제 후 다시 생성 (drop-create)
+     * create-drop create와 같으나 종료시점에 drop
+     * update 기존 테이블에 추가 (추가만 가능)
+     * validate 엔티티와 테이블이 정상 매핑이 되었는지 확인 가능
+   * 자동 생성시 주의점
+     * 운영 장비에는 절대 create,create-drop,update사용 X

@@ -1,15 +1,19 @@
 package hellojpa;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Member")
+@Table(name = "Member") //Table이 Member이면 생략 가능
 public class Member {
     @Id
     private Long id;
+    @Column(unique = true,length = 10)
     private String name;
+
+    private int age;
 
     public Member() {
 

@@ -52,7 +52,14 @@
      * @Lob
        * 지정할 수 있는 속성 없음
        * String 이면 CLOB 나머지 BLOB
-   * 기본 키 매핑: @Id
+   * 기본 키 매핑
+     * @Id
+       * 직접 할당
+     * @GeneratedValue
+       * 자동할당
+       * IDENTITY
+       * Sequence
+       * Table
    * 연관관계 매핑: @ManyToOne, @JoinColumn
  * 데이타베이스 스키마 자동 생성
    * hibernate.hbm2ddl.auto 옵션

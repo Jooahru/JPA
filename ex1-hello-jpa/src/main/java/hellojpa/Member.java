@@ -4,26 +4,29 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@SequenceGenerator(name = "member_seq_generator", sequenceName = "member_seq")
 public class Member {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq_generator")
     private Long id;
 
     @Column(name = "name")
     private String username;
 
-    private Integer age;
+    public Long getId() {
+        return id;
+    }
 
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
+    public String getUsername() {
+        return username;
+    }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
-
-    @Lob
-    private String description;
-    //Getter, Setter…
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

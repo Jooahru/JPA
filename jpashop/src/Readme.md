@@ -57,4 +57,35 @@
        * 관계형 데이터베이스는 상속 관계X
        * 슈퍼타입 서브타입 관계라는 모델링 기법이 객체 상속과 유사
        * 객체의 상속 구조와 DB의 슈퍼타입 서브타입 관계를 매핑
-     * @MappedSuperclass
+       * @Inheritance
+       * @DiscriminatorColumn(name="DTYPE")
+       * @DiscriminatorValue("값지정가능")
+     * 조인전략(@Inheritance(strategy = InheritanceType.JOINED))
+       * 장점
+         * 테이블 정규화
+         * 외래키 참조 무결성 제약조건 활용가능
+         * 저장공간 효율화
+       * 단점
+         * 조회시 조인을 많이 사용, 성능 저하
+         * 조회쿼리 복잡
+         * 데이터 저장시 INSERT SQL 2번 호출
+     * 단일테이블 전략(@Inheritance(strategy = InheritanceType.SINGLE_TABLE))
+       * 장점
+         * 조인 필요 없으므로 일반적으로 조회 성능이 빠름
+         * 조회쿼리 단순
+       * 단점
+         * 자식엔티티가 매핑한 컬럼은 모두 null 허용
+         * 단일 테이블에 모든 것을 저장하므로 테이블이 커질 수 있다
+         * 상황에 따라서 조회 성능이 오히려 느려질 수 있다
+     * 구현 클래스마다 테이블 전략(@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS))
+       * 장점
+         * 서브 타입을 명확하게 구분해서 처리할 때 효과적
+         * Not null 사용가능
+       * 단점
+         * 여러 자식 테이블을 함께 조회할 때 성능이 느림(UNION SQL)
+         * 자식테이블 통합 쿼리 어려움
+     * @MappedSuperClass
+       * 공통적으로 사용할 필드를 한꺼번에 적용가능 (ex: BaseEntity)
+       * 엔티티가 아님 (테이블 생성 안된다)
+       * 상속관계 매핑 아님
+       * 추상클래스 권장

@@ -107,3 +107,16 @@
    * 프록시 강제 초기화
      * org.hibernate.Hibernate.initialize(entity);
      * 참고 JPA 표준에는 강제 초기화 없음
+ * 지연로딩
+   * (fetch = FetchType.LAZY)로 설정시 실제 조회할 때 DB에서 가져와서 초기화함
+   * 예) 멤버안에 팀이 있을 경우 팀에 lazy걸면 멤버조회시 팀은 프록시 객체로 가져오고 실제 팀을 조회할 때 초기화한다
+ * 즉시로딩
+   * (fetch = FetchType.EAGER)
+   * 예) 멤버안에 팀이 있을 경우 멤버조회시 항상 팀도 조회
+ * 프록시와 즉시로딩 주의
+   * 가급적 지연 로딩만 사용(특히 실무에서)
+   * 즉시 로딩을 적용하면 예상하지 못한 SQL이 발생
+   * 즉시 로딩은 JPQL에서 N+1 문제를 일으킨다
+   * @ManyToOne, @OneToOne은 기본이 즉시 로딩 (=> LAZY로 설정해주는게 좋음)
+   * @OneToMany, @ManyToMany는 기본이 지연 로딩
+   

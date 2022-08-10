@@ -23,3 +23,16 @@
    * ==================================================
    * SELECT m FROM Member m wher m.username=?1
    * query.setParameter(1,usernameParam);
+ * 프로젝션
+   * SELECT절에 조회할 대상을 지정하는 것
+   * 프로젝션 대상: 엔티티, 임베디드 타입, 스칼라타입(숫자,문자등 기본데이터 타입)
+   * SELECT m.team FROM Member m => 엔티티 프로젝션
+   * SELECT m FROM Member m => 엔티티 프로젝션
+   * SELECT m.address FROM Member m => 임베디드 타입 프로젝션
+   * SELECT m.username, m.age FROM Member m => 스칼라 타입 프로젝션
+   * DISTINCT로 중복 제거
+ * 프로젝션 - 여러 값 조회
+   * Query 타입으로 조회
+   * Object[] 타입으로 조회
+   * new 명령어로 조회
+     * 단순 값을 DTO로 바로 조회

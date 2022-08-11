@@ -43,5 +43,12 @@ public class Member {
         this.age = age;
     }
 
-
+    @Override
+    public String toString() {
+        return "Member{" +
+            "id=" + id +
+            ", userName='" + userName + '\'' +
+            ", age=" + age +
+            '}';
+    }
 }

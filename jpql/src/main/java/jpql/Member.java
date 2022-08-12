@@ -1,6 +1,9 @@
 package jpql;
 
+import static javax.persistence.FetchType.*;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -9,14 +12,15 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Member {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
     private String userName;
 
     private int age;
 
-    @ManyToOne
-    @JoinColumn(name="TEAM_ID")
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "TEAM_ID")
     private Team team;
 
     public Long getId() {
@@ -41,6 +45,20 @@ public class Member {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public void changeTeam(Team team) {
+        this.team = team;
+        team.getMembers().add(this);
+
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     @Override

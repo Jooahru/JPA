@@ -40,3 +40,17 @@
    * JPA는 페이징을 다음 두 API로 추상화
      * setFirstResult(int startPosition): 조회 시작 위치(0부터 시작)
      * setMaxResults(int maxResult): 조회할 데이터 수
+ * 조인
+   * 내부 조인 : INNER
+     * SELECT m FROM Member m [INNER] JOIN m.team t
+   * 외부 조인 : OUTER
+     * SELECT m FROM Member m LEFT [OUTER] JOIN m.team t
+   * 세타 조인:
+     * select count(m) from Member m, Team t where m.username = t.name
+   * 조인 ON절
+     * 조인대상 필터링
+       * 예) 회원과 팀을 조인하면서 팀 이름이 A인 팀만 조인
+       * JPQL: SELECT m, t FROM Member m LEFT JOIN m.team t on t.name = 'A'
+     * 연관관계 없는 엔티티 외부 조인
+       * 예) 회원의 이름과 팀의 이름이 같은 대상 외부 조인
+       * JPQL: SELECT m, t FROM Member m LEFT JOIN Team t on m.username = t.name

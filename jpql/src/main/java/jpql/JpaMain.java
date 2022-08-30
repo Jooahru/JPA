@@ -33,16 +33,20 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            //String query = "select m from Member m inner join m.team t";
-            //String query = "select m from Member m left outer join m.team t";
-//            String query = "select m from Member m, Team t where m.userName = t.name";
-//            String query = "select m from Member m left join m.team t on t.name = 'teamA'";
-            //String query = "select m from Member m left join Team t on m.userName = t.name";
-            String query = "select m.userName, 'HELLO', TRUE from Member m " +
-                //"where m.type = jpql.MemberType.ADMIN";
-                "where m.type = :userType";
-            List<Object[]> result = em.createQuery(query).setParameter("userType", MemberType.ADMIN)
+
+            String query = "select "+
+                                    "case when m.age <= 10 then '학생요금' " +
+                                    "     when m.age >= 60 then '경로요금' " +
+                                    "     else '일반요금' " +
+                                    "end "+
+                "from Member m";
+
+            List<String> result = em.createQuery(query, String.class)
                 .getResultList();
+
+            for (String s : result) {
+                System.out.println("s = " + s);
+            }
 
             tx.commit();
         } catch (Exception e) {

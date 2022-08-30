@@ -23,13 +23,12 @@ public class JpaMain {
             em.persist(team);
 
             Member member = new Member();
-                member.setUserName("member1");
-                member.setAge(10);
+            member.setUserName("member1");
+            member.setAge(10);
+            member.setType(MemberType.ADMIN);
 
-                member.setTeam(team);
-                em.persist(member);
-
-
+            member.setTeam(team);
+            em.persist(member);
 
             em.flush();
             em.clear();
@@ -38,9 +37,12 @@ public class JpaMain {
             //String query = "select m from Member m left outer join m.team t";
 //            String query = "select m from Member m, Team t where m.userName = t.name";
 //            String query = "select m from Member m left join m.team t on t.name = 'teamA'";
-            String query = "select m from Member m left join Team t on m.userName = t.name";
-            List<Member> result = em.createQuery(query, Member.class).getResultList();
-
+            //String query = "select m from Member m left join Team t on m.userName = t.name";
+            String query = "select m.userName, 'HELLO', TRUE from Member m " +
+                //"where m.type = jpql.MemberType.ADMIN";
+                "where m.type = :userType";
+            List<Object[]> result = em.createQuery(query).setParameter("userType", MemberType.ADMIN)
+                .getResultList();
 
             tx.commit();
         } catch (Exception e) {

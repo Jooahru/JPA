@@ -93,3 +93,12 @@
    * 단순 CASE 식 (정확한 조건 매칭)
    * COALESCE: 하나씩 조회해서 null이 아니면 반환
    * NULLIF: 두 값이 같으면 null반환, 다르면 첫번째 값 반환
+ * JPQL 기본함수
+   * CONCAT
+   * SUBSTRING
+   * TRIM
+   * LOWER,UPPER
+   * LENGTH
+   * LOCATE
+   * ABS,SQRT,MOD
+   * SIZE,INDEX(JPA용도)
